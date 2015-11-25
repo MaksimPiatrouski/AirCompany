@@ -1,0 +1,6 @@
+C:\workspace\CSharp\projects\AirCompany\AirCompany\bin\Debug\AirCompany.exe.config
+C:\workspace\CSharp\projects\AirCompany\AirCompany\bin\Debug\AirCompany.exe
+C:\workspace\CSharp\projects\AirCompany\AirCompany\bin\Debug\AirCompany.pdb
+C:\workspace\CSharp\projects\AirCompany\AirCompany\obj\Debug\AirCompany.csprojResolveAssemblyReference.cache
+C:\workspace\CSharp\projects\AirCompany\AirCompany\obj\Debug\AirCompany.exe
+C:\workspace\CSharp\projects\AirCompany\AirCompany\obj\Debug\AirCompany.pdb
