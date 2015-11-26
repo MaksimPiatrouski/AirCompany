@@ -13,6 +13,8 @@ namespace AirCompany
         const string countSummaryPlanesSpecs = "2";
         const string sortPlanes = "3";
         const string findPlanes = "4";
+        const string showCompanyStats = "5";
+
         const string exit = "0";
 
         static void Main(string[] args)
@@ -20,6 +22,7 @@ namespace AirCompany
 
 
             List<Plane> planesList = Utils.createPlanesList();
+            Company myCompany = Utils.createCompany(planesList); 
 
             bool loop = false;
             do
@@ -30,13 +33,12 @@ namespace AirCompany
                 switch (menuChoice)
                 {
                     case showPlanes:
-
                         Utils.printListOfPlanes(planesList);
                         loop = Utils.hasBackToMenuSelector();
                         break;
 
                     case countSummaryPlanesSpecs:
-                        Utils.countSummarySpecs(planesList);
+                        Utils.printSummarySpecs(planesList);
                         loop = Utils.hasBackToMenuSelector();
                         break;
 
@@ -48,6 +50,11 @@ namespace AirCompany
                     case findPlanes:
                         Utils.printFinderMenu();
                         Utils.findPlanes(planesList);
+                        loop = Utils.hasBackToMenuSelector();
+                        break;
+
+                    case showCompanyStats:
+                        Console.WriteLine(myCompany.ToString());
                         loop = Utils.hasBackToMenuSelector();
                         break;
 
