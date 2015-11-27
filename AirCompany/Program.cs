@@ -49,8 +49,13 @@ namespace AirCompany
 
                     case findPlanes:
                         Utils.printFinderMenu();
-                        Utils.findPlanes(planesList);
-                        loop = Utils.hasBackToMenuSelector();
+                        string paramSelector = Console.ReadLine();
+                        bool correctSelection = Utils.hasCorrectSelection(paramSelector);
+                        if (correctSelection)
+                        {
+                            Utils.findPlanes(planesList, paramSelector);
+                            loop = Utils.hasBackToMenuSelector();
+                        }
                         break;
 
                     case showCompanyStats:
