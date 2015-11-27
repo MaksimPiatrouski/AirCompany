@@ -24,8 +24,8 @@ namespace AirCompany
             List<Plane> planesList = Utils.createPlanesList();
             Company myCompany = Utils.createCompany(planesList); 
 
-            bool loop = false;
-            do
+           bool loop = true;
+           while (loop)
             {
                 Utils.printMenu();
 
@@ -72,7 +72,6 @@ namespace AirCompany
                         break;
                 }
             }
-            while (loop);
         }
 
     }

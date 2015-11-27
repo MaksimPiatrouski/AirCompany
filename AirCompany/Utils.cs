@@ -132,7 +132,7 @@ namespace AirCompany
             }
             else
             {
-                Console.WriteLine("Illegal input\n");
+                Console.WriteLine("Illegal input. No such paramether found\n");
                 return false;
             }
         }

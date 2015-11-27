@@ -39,7 +39,7 @@ namespace AirCompany
 
         public override string ToString()
         {
-            return "\nAirCompany: " + companyName + "\n. Number of planes: " + numberOfPlanes 
+            return "\n. AirCompany name: \"" + companyName + "\"\n. Number of planes: " + numberOfPlanes
                 + "\n. Summary planes price, mls $: " + summaryPrice + "\n";
         }
     }
