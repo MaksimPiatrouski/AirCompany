@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace AirCompany
 {
-    class Program
+    class Runner
     {
         const string showPlanes = "1";
-        const string countSummaryPlanesSpecs = "2";
-        const string sortPlanes = "3";
-        const string findPlanes = "4";
-        const string showCompanyStats = "5";
+        const string addPlanes = "2";
+        const string removePlanes = "3";
+        const string countSummaryPlanesSpecs = "4";
+        const string sortPlanes = "5";
+        const string findPlanes = "6";
+        const string showCompanyStats = "7";
+        const string workWExternal = "8";
 
         const string exit = "0";
 
@@ -22,7 +25,7 @@ namespace AirCompany
 
 
             List<Plane> planesList = Utils.createPlanesList();
-            Company myCompany = Utils.createCompany(planesList); 
+            Company myCompany = Utils.createCompany(planesList);
 
             bool loop = false;
             do
@@ -34,6 +37,16 @@ namespace AirCompany
                 {
                     case showPlanes:
                         Utils.printListOfPlanes(planesList);
+                        loop = Utils.hasBackToMenuSelector();
+                        break;
+
+                    case addPlanes:
+                        AddPlanesUtils.addPlanes(planesList);
+                        loop = Utils.hasBackToMenuSelector();
+                        break;
+
+                    case removePlanes:
+                        RemovePlaneUtils.removePlane(planesList);
                         loop = Utils.hasBackToMenuSelector();
                         break;
 
@@ -55,6 +68,11 @@ namespace AirCompany
 
                     case showCompanyStats:
                         Console.WriteLine(myCompany.ToString());
+                        loop = Utils.hasBackToMenuSelector();
+                        break;
+
+                    case workWExternal:
+                        ExternalFileUtils.fileActions(planesList);
                         loop = Utils.hasBackToMenuSelector();
                         break;
 

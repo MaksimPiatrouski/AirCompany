@@ -1,0 +1,53 @@
+AirBus A380-900
+
+. Type: PassengerPlane
+. Year: 2013
+. Price, mln $: 401.4
+. Number of Passengers: 656
+. Max distance, km: 15400
+. Max speed, km/h: 1020
+. Cargo capacity, m3: 318.4
+. Max cargo load, kg: 23600
+. Number of classes: 3
+Boeing 747
+
+. Type: PassengerPlane
+. Year: 2010
+. Price, mln $: 255.3
+. Number of Passengers: 581
+. Max distance, km: 14850
+. Max speed, km/h: 988
+. Cargo capacity, m3: 275.6
+. Max cargo load, kg: 21200
+. Number of classes: 3
+Bombardier BD-700
+
+. Type: BusinessPlane
+. Year: 2008
+. Price, mln $: 48.2
+. Number of VIP passengers: 3
+. Max distance, km: 9360
+. Max speed, km/h: 950
+. Cargo capacity, m3: 18.2
+. Max cargo load, kg: 850
+Dassault Falcon 900
+
+. Type: BusinessPlane
+. Year: 2015
+. Price, mln $: 17.6
+. Number of VIP passengers: 5
+. Max distance, km: 8334
+. Max speed, km/h: 916
+. Cargo capacity, m3: 16.6
+. Max cargo load, kg: 680
+An-225 Mriya
+
+. Type: FreightPlane
+. Year: 2001
+. Price, mln $: 225.3
+. Max distance: 4000
+. Max speed, km/h: 850
+. Cargo capacity, m3: 1300
+. Max cargo load, kg: 152000
+. Number of hatches: 2
+

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace planes
 {
+    [Serializable]
     class BusinessPlane : Plane
     {
         private int _numOfVipPassengers;
@@ -23,7 +24,7 @@ namespace planes
 
         public override string ToString()
         {
-            return "Type: " + GetType().Name + "\n\n. Year: " + year + "\n. Name: " + name + "\n. Price, mln $: " + price
+            return name + "\n\n. Type: " + GetType().Name + "\n. Year: " + year + "\n. Price, mln $: " + price
                 + "\n. Number of VIP passengers: " + numOfVipPassengers + "\n. Max distance, km: " + maxDistance + "\n. Max speed, km/h: " + maxSpeed
                 + "\n. Cargo capacity, m3: " + capacity + "\n. Max cargo load, kg: " + maxLoad + "\n";
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace planes
 {
+    [Serializable]
     class Plane
     {
         private string _name;

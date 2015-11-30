@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace planes
 {
+    [Serializable]
     class FreightPlane : Plane
     {
         private int _numOfHatches;
@@ -22,8 +23,8 @@ namespace planes
         }
         public override string ToString()
         {
-            return "Type: " + GetType().Name + "\n\n. Year: " + year + "\n. Name: " + name + "\n. Price, mln $: " + price + "\n. Max distance: " + maxDistance
-                + "\n. Max speed, km/h: " + maxSpeed + "\n. Cargo capacity, m3: " + capacity + "\n. Max cargo load, kg: " + maxLoad 
+            return name + "\n\n. Type: " + GetType().Name + "\n. Year: " + year + "\n. Price, mln $: " + price + "\n. Max distance: " + maxDistance
+                + "\n. Max speed, km/h: " + maxSpeed + "\n. Cargo capacity, m3: " + capacity + "\n. Max cargo load, kg: " + maxLoad
                 + "\n. Number of hatches: " + numOfHatches + "\n";
         }
     }

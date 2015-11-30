@@ -33,8 +33,8 @@ namespace AirCompany
         //Creates new Company object
         public static Company createCompany(List<Plane> planesList)
         {
-           int numberOfPlanes = planesList.Count();
-           double summaryPrice = 0;
+            int numberOfPlanes = planesList.Count();
+            double summaryPrice = 0;
 
             foreach (Plane p in planesList)
             {
@@ -49,10 +49,13 @@ namespace AirCompany
         {
             Console.WriteLine("\n------------------ Menu ------------------\n"
                     + "1. Show list of planes\n"
-                    + "2. Count summary capacity and load\n"
-                    + "3. Sort planes by max range\n"
-                    + "4. Find planes by paramether\n"
-                    + "5. Print aircompany stats\n"
+                    + "2. Add Planes\n"
+                    + "3. Remove planes\n"
+                    + "4. Count summary capacity and load\n"
+                    + "5. Sort planes by max range\n"
+                    + "6. Find planes by paramether\n"
+                    + "7. Print aircompany stats\n"
+                    + "8. Work with external files\n"
                     + "0. Exit\n"
                     + "------------------------------------------");
         }
@@ -87,6 +90,16 @@ namespace AirCompany
             foreach (Plane p in planesList)
             {
                 Console.WriteLine(p.ToString());
+            }
+        }
+
+        public static void printListOfPlanesWPos(List<Plane> planesList)
+        {
+            Console.WriteLine("\n----------- List of planes ---------------");
+            for (int i = 0; i < planesList.Count; i++)
+            {
+                int position = i + 1;
+                Console.WriteLine(position + ") " + planesList[i].ToString());
             }
         }
 
@@ -173,6 +186,10 @@ namespace AirCompany
                         minValueD = double.Parse(min);
                         maxValueD = double.Parse(max);
                     }
+                    catch (OverflowException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                     catch (FormatException e)
                     {
                         correctFormat = false;
@@ -185,6 +202,10 @@ namespace AirCompany
                     {
                         minValueI = int.Parse(min);
                         maxValueI = int.Parse(max);
+                    }
+                    catch (OverflowException e)
+                    {
+                        Console.WriteLine(e.Message);
                     }
                     catch (FormatException e)
                     {
