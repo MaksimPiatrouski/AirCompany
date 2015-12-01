@@ -1,17 +1,16 @@
-﻿using planes;
+﻿using Beans;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AirCompany
+namespace Utils
 {
     class RemovePlaneUtils
     {
+        //Removes Plane object from collection by its index
         public static void removePlane(List<Plane> planesList)
         {
-            Utils.printListOfPlanesWPos(planesList);
+            PlaneListUtils.printListOfPlanesWPos(planesList);
             Console.WriteLine("Enter number of plane you want to remove\n");
             try
             {
@@ -22,15 +21,15 @@ namespace AirCompany
             }
             catch (OverflowException e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message + "\n");
             }
             catch (FormatException e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine("Illegal format (" + e.Message + ")\n");
             }
             catch (ArgumentOutOfRangeException e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message + "\n");
             }
         }
     }

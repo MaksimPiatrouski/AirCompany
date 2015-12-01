@@ -44,6 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessPlane.cs" />
+    <Compile Include="CompanyUtils.cs" />
+    <Compile Include="FindPlaneUtils.cs" />
+    <Compile Include="IllegalMinMaxValuesException.cs" />
+    <Compile Include="PlaneListUtils.cs" />
+    <Compile Include="NavigationUtils.cs" />
+    <Compile Include="NoSuchPlaneException.cs" />
     <Compile Include="ExternalFileUtils.cs" />
     <Compile Include="IllegalYearException.cs" />
     <Compile Include="FreightPlane.cs" />
@@ -54,7 +60,8 @@
     <Compile Include="Runner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemovePlaneUtils.cs" />
-    <Compile Include="Utils.cs" />
+    <Compile Include="SortPlanesUtils.cs" />
+    <Compile Include="SumarySpecsUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

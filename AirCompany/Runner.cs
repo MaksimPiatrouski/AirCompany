@@ -1,11 +1,9 @@
-﻿using planes;
+﻿using Beans;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Utils;
 
-namespace AirCompany
+namespace Runner
 {
     class Runner
     {
@@ -24,56 +22,61 @@ namespace AirCompany
         {
 
 
-            List<Plane> planesList = Utils.createPlanesList();
-            Company myCompany = Utils.createCompany(planesList);
+            List<Plane> planesList = PlaneListUtils.createPlanesList();
+            Company myCompany = CompanyUtils.createCompany(planesList);
 
             bool loop = false;
             do
             {
-                Utils.printMenu();
+                NavigationUtils.printMenu();
 
                 string menuChoice = Console.ReadLine();
                 switch (menuChoice)
                 {
                     case showPlanes:
-                        Utils.printListOfPlanes(planesList);
-                        loop = Utils.hasBackToMenuSelector();
+                        PlaneListUtils.printListOfPlanes(planesList);
+                        loop = NavigationUtils.hasBackToMenuSelector();
                         break;
 
                     case addPlanes:
                         AddPlanesUtils.addPlanes(planesList);
-                        loop = Utils.hasBackToMenuSelector();
+                        loop = NavigationUtils.hasBackToMenuSelector();
                         break;
 
                     case removePlanes:
                         RemovePlaneUtils.removePlane(planesList);
-                        loop = Utils.hasBackToMenuSelector();
+                        loop = NavigationUtils.hasBackToMenuSelector();
                         break;
 
                     case countSummaryPlanesSpecs:
-                        Utils.printSummarySpecs(planesList);
-                        loop = Utils.hasBackToMenuSelector();
+                        SumarySpecsUtils.planesSummarySpecs(planesList);
+                        loop = NavigationUtils.hasBackToMenuSelector();
                         break;
 
                     case sortPlanes:
-                        Utils.sortPlanes(planesList);
-                        loop = Utils.hasBackToMenuSelector();
+                        SortPlanesUtils.sortPlanes(planesList);
+                        loop = NavigationUtils.hasBackToMenuSelector();
                         break;
 
                     case findPlanes:
-                        Utils.printFinderMenu();
-                        Utils.findPlanes(planesList);
-                        loop = Utils.hasBackToMenuSelector();
+                        NavigationUtils.printFinderMenu();
+                        string paramSelector = Console.ReadLine();
+                        bool correctSelection = FindPlaneUtils.hasCorrectSelection(paramSelector);
+                        if (correctSelection)
+                        {
+                            FindPlaneUtils.findPlanes(planesList, paramSelector);
+                            loop = NavigationUtils.hasBackToMenuSelector();
+                        }
                         break;
 
                     case showCompanyStats:
                         Console.WriteLine(myCompany.ToString());
-                        loop = Utils.hasBackToMenuSelector();
+                        loop = NavigationUtils.hasBackToMenuSelector();
                         break;
 
                     case workWExternal:
                         ExternalFileUtils.fileActions(planesList);
-                        loop = Utils.hasBackToMenuSelector();
+                        loop = NavigationUtils.hasBackToMenuSelector();
                         break;
 
                     case exit:

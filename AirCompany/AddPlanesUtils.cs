@@ -1,11 +1,9 @@
-﻿using planes;
+﻿using Beans;
+using Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AirCompany
+namespace Utils
 
 {
     class AddPlanesUtils
@@ -28,6 +26,7 @@ namespace AirCompany
         static int numOfVipPassengers;
         static int yearNow = DateTime.Now.Year;
 
+        //Allows to add new Plane object to the List
         public static void addPlanes(List<Plane> planesList)
         {
             bool loop = false;
@@ -49,11 +48,11 @@ namespace AirCompany
                         }
                         catch (OverflowException e)
                         {
-                            Console.WriteLine(e.Message);
+                            Console.WriteLine(e.Message + "\n");
                         }
                         catch (FormatException e)
                         {
-                            Console.WriteLine(e.Message + "\n");
+                            Console.WriteLine("Illegal format (" + e.Message + ")\n");
                         }
                         catch (IllegalYearException e)
                         {
@@ -69,11 +68,11 @@ namespace AirCompany
                         }
                         catch (OverflowException e)
                         {
-                            Console.WriteLine(e.Message);
+                            Console.WriteLine(e.Message + "\n");
                         }
                         catch (FormatException e)
                         {
-                            Console.WriteLine(e.Message + "\n");
+                            Console.WriteLine("Illegal format (" + e.Message + ")\n");
                         }
                         catch (IllegalYearException e)
                         {
@@ -89,11 +88,11 @@ namespace AirCompany
                         }
                         catch (OverflowException e)
                         {
-                            Console.WriteLine(e.Message);
+                            Console.WriteLine(e.Message + "\n");
                         }
                         catch (FormatException e)
                         {
-                            Console.WriteLine(e.Message + "\n");
+                            Console.WriteLine("Illegal format (" + e.Message + ")\n");
                         }
                         catch (IllegalYearException e)
                         {
@@ -115,6 +114,7 @@ namespace AirCompany
             while (loop);
         }
 
+        //Iitializes data for PassengerPlane constructor
         public static void addPassengerPlane(List<Plane> planesList)
         {
             Console.Write("Enter plane name (string): ");
@@ -125,23 +125,25 @@ namespace AirCompany
             {
                 throw new IllegalYearException("Entered year has not come yet.");
             }
-            Console.Write("Enter price (double): ");
+            Console.Write("Enter price, mln$ (double): ");
             price = double.Parse(Console.ReadLine());
             Console.Write("Enter number of passengers (int): ");
             numOfPassengers = int.Parse(Console.ReadLine());
-            Console.Write("Enter max distance (int): ");
+            Console.Write("Enter max distance, km (int): ");
             maxDistance = int.Parse(Console.ReadLine());
-            Console.Write("Enter max speed (int): ");
+            Console.Write("Enter max speed, km/h (int): ");
             maxSpeed = int.Parse(Console.ReadLine());
-            Console.Write("Enter cargo capacity (double): ");
+            Console.Write("Enter cargo capacity, m3 (double): ");
             capacity = double.Parse(Console.ReadLine());
-            Console.Write("Enter max cargo load (int): ");
+            Console.Write("Enter max cargo load, kg (int): ");
             maxLoad = int.Parse(Console.ReadLine());
             Console.Write("Enter number of classes (int): ");
             numOfClasses = int.Parse(Console.ReadLine());
             planesList.Add(new PassengerPlane(name, year, price, numOfPassengers, maxDistance, maxSpeed, capacity, maxLoad, numOfClasses));
+            Console.WriteLine("Tha plane has been successfully added");
         }
 
+        //Iitializes data for FreightPlane constructor
         public static void addFreightPlane(List<Plane> planesList)
         {
             Console.Write("Enter plane name (string): ");
@@ -152,21 +154,23 @@ namespace AirCompany
             {
                 throw new IllegalYearException("Entered year has not come yet.");
             }
-            Console.Write("Enter price (double): ");
+            Console.Write("Enter price, mln$ (double): ");
             price = double.Parse(Console.ReadLine());
-            Console.Write("Enter max distance (int): ");
+            Console.Write("Enter max distance, km (int): ");
             maxDistance = int.Parse(Console.ReadLine());
-            Console.Write("Enter max speed (int): ");
+            Console.Write("Enter max speed, km/h (int): ");
             maxSpeed = int.Parse(Console.ReadLine());
-            Console.Write("Enter cargo capacity (double): ");
+            Console.Write("Enter cargo capacity, m3 (double): ");
             capacity = double.Parse(Console.ReadLine());
-            Console.Write("Enter max cargo load (int): ");
+            Console.Write("Enter max cargo load, kg (int): ");
             maxLoad = int.Parse(Console.ReadLine());
             Console.Write("Enter number of hatches (int): ");
             numOfHatches = int.Parse(Console.ReadLine());
             planesList.Add(new FreightPlane(name, year, price, maxDistance, maxSpeed, capacity, maxLoad, numOfHatches));
+            Console.WriteLine("Tha plane has been successfully added");
         }
 
+        //Iitializes data for BusinessPlane constructor
         public static void addBusinessPlane(List<Plane> planesList)
         {
             Console.Write("Enter plane name (string): ");
@@ -177,20 +181,20 @@ namespace AirCompany
             {
                 throw new IllegalYearException("Entered year has not come yet.");
             }
-            Console.Write("Enter price (double): ");
+            Console.Write("Enter price, mln$ (double): ");
             price = double.Parse(Console.ReadLine());
             Console.Write("Enter number of VIP passengers (int): ");
             numOfVipPassengers = int.Parse(Console.ReadLine());
-            Console.Write("Enter max distance (int): ");
+            Console.Write("Enter max distance, km (int): ");
             maxDistance = int.Parse(Console.ReadLine());
-            Console.Write("Enter max speed (int): ");
+            Console.Write("Enter max speed, km/h (int): ");
             maxSpeed = int.Parse(Console.ReadLine());
-            Console.Write("Enter cargo capacity (double): ");
+            Console.Write("Enter cargo capacity, m3 (double): ");
             capacity = double.Parse(Console.ReadLine());
-            Console.Write("Enter max cargo load (int): ");
+            Console.Write("Enter max cargo load, kg (int): ");
             maxLoad = int.Parse(Console.ReadLine());
             planesList.Add(new BusinessPlane(name, year, price, numOfVipPassengers, maxDistance, maxSpeed, capacity, maxLoad));
-
+            Console.WriteLine("Tha plane has been successfully added");
         }
     }
 }

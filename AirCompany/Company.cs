@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AirCompany
+﻿namespace Beans
 {
     class Company
     {
@@ -39,7 +33,7 @@ namespace AirCompany
 
         public override string ToString()
         {
-            return "\nAirCompany: " + companyName + "\n. Number of planes: " + numberOfPlanes 
+            return "\nAirCompany: " + companyName + "\n. Number of planes: " + numberOfPlanes
                 + "\n. Summary planes price, mls $: " + summaryPrice + "\n";
         }
     }

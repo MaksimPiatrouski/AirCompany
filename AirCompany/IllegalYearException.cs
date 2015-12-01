@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AirCompany
+namespace Exceptions
 {
     class IllegalYearException : Exception
     {
         //
         // Summary:
         //     Initializes a new instance of the IllegalYearException class.
-        public IllegalYearException(){
+        public IllegalYearException()
+        {
         }
         //
         // Summary:
@@ -21,7 +18,8 @@ namespace AirCompany
         // Parameters:
         //   message:
         //     The message that describes the error.
-        public IllegalYearException(string message): base(message){
+        public IllegalYearException(string message) : base(message)
+        {
         }
     }
 }
