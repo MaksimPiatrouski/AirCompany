@@ -48,8 +48,6 @@ namespace Utils
         const string fileNameTxtRead = "PlanesToRead.txt";
         const string fileNameDat = "Planes.dat";
 
-        static string mydocpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
         //Allows to select an action with external file 
         public static void fileActions(List<Plane> planesList)
         {
@@ -103,7 +101,7 @@ namespace Utils
         {
             try
             {
-                using (StreamWriter outputFile = new StreamWriter(mydocpath + @"\" + fileNameTxt))
+                using (StreamWriter outputFile = new StreamWriter(@".\" + fileNameTxt))
                     foreach (Plane p in planesList)
                     {
                         outputFile.WriteLine(p.ToString());
@@ -119,133 +117,152 @@ namespace Utils
                 Console.WriteLine(e.Message);
             }
 
-            Console.Write("\nFile has been wrote successfully (file placed in \"My Documents\")\n");
+            Console.Write("\nFile has been wrote successfully\n");
         }
 
-
+        //Reads data from txt file and creates Plane object
         public static void readTxtFile(List<Plane> planesList)
         {
-            string[] lines = System.IO.File.ReadAllLines(mydocpath + @"\" + fileNameTxtRead);
+            string[] lines = System.IO.File.ReadAllLines(@".\" + fileNameTxtRead);
             Console.WriteLine(lines.Length);
             for (int i = 0; i < lines.Length; i++)
             {
                 string[] values = lines[i].Split(',');
-                for (int k = 0; k < values.Length; k++){
+                for (int k = 0; k < values.Length; k++)
+                {
                     values[k] = values[k].Trim();
-            }
-
-            if (values[0].ToLower().Equals("passengerplane"))
-            {
-                name = values[Name];
-                year = int.Parse(values[Year]);
-                if (year > yearNow)
-                {
-                    throw new IllegalYearException("Entered year has not come yet.");
                 }
-                price = double.Parse(values[Price]);
-                numOfPassengers = int.Parse(values[pPass]);
-                maxDistance = int.Parse(values[pDist]);
-                maxSpeed = int.Parse(values[pSpeed]);
-                capacity = double.Parse(values[pCapacity]);
-                maxLoad = int.Parse(values[pLoad]);
-                numOfClasses = int.Parse(values[pClasses]);
-                planesList.Add(new PassengerPlane(name, year, price, numOfPassengers, maxDistance, maxSpeed, capacity, maxLoad, numOfClasses));
-            }
-            else if (values[0].ToLower().Equals("freightplane"))
-            {
-                name = values[Name];
-                year = int.Parse(values[Year]);
-                if (year > yearNow)
+
+                if (values[0].ToLower().Equals("passengerplane"))
                 {
-                    throw new IllegalYearException("Entered year has not come yet.");
+                    ExternalFileUtils.initPassengerPlaneFields(values);
+                    planesList.Add(new PassengerPlane(name, year, price, numOfPassengers, maxDistance, maxSpeed, capacity, maxLoad, numOfClasses));
                 }
-                price = double.Parse(values[Price]);
-
-                maxDistance = int.Parse(values[fDist]);
-                maxSpeed = int.Parse(values[fSpeed]);
-                capacity = double.Parse(values[fCapacity]);
-                maxLoad = int.Parse(values[fLoad]);
-                numOfHatches = int.Parse(values[fHatches]);
-                planesList.Add(new FreightPlane(name, year, price, maxDistance, maxSpeed, capacity, maxLoad, numOfHatches));
-            }
-            else if (values[0].ToLower().Equals("businessplane"))
-            {
-                name = values[Name];
-                year = int.Parse(values[Year]);
-                if (year > yearNow)
+                else if (values[0].ToLower().Equals("freightplane"))
                 {
-                    throw new IllegalYearException("Entered year has not come yet.");
+                    ExternalFileUtils.initFreightPlaneFields(values);
+                    planesList.Add(new FreightPlane(name, year, price, maxDistance, maxSpeed, capacity, maxLoad, numOfHatches));
                 }
-                price = double.Parse(values[Price]);
-                numOfVipPassengers = int.Parse(values[pPass]);
-                maxDistance = int.Parse(values[pDist]);
-                maxSpeed = int.Parse(values[pSpeed]);
-                capacity = double.Parse(values[pCapacity]);
-                maxLoad = int.Parse(values[pLoad]);
-                planesList.Add(new BusinessPlane(name, year, price, numOfVipPassengers, maxDistance, maxSpeed, capacity, maxLoad));
+                else if (values[0].ToLower().Equals("businessplane"))
+                {
+                    ExternalFileUtils.initBusinessPlaneFields(values);
+                    planesList.Add(new BusinessPlane(name, year, price, numOfVipPassengers, maxDistance, maxSpeed, capacity, maxLoad));
+                }
+                else
+                {
+                    Console.WriteLine("String " + i + 1 + " has wrong format");
+                }
             }
-            else
+            Console.WriteLine("File has been read succesfully.");
+        }
+
+        //Initializes values for PassengerPlane object's constructor
+        public static void initPassengerPlaneFields(string[] values)
+        {
+            name = values[Name];
+            year = int.Parse(values[Year]);
+            if (year > yearNow)
             {
-                Console.WriteLine("String " + i + 1 + " has wrong format");
+                throw new IllegalYearException("Entered year has not come yet.");
+            }
+            price = double.Parse(values[Price]);
+            numOfPassengers = int.Parse(values[pPass]);
+            maxDistance = int.Parse(values[pDist]);
+            maxSpeed = int.Parse(values[pSpeed]);
+            capacity = double.Parse(values[pCapacity]);
+            maxLoad = int.Parse(values[pLoad]);
+            numOfClasses = int.Parse(values[pClasses]);
+        }
+
+        //Initializes values for FreightPlane object's constructor
+        public static void initFreightPlaneFields(string[] values)
+        {
+            name = values[Name];
+            year = int.Parse(values[Year]);
+            if (year > yearNow)
+            {
+                throw new IllegalYearException("Entered year has not come yet.");
+            }
+            price = double.Parse(values[Price]);
+
+            maxDistance = int.Parse(values[fDist]);
+            maxSpeed = int.Parse(values[fSpeed]);
+            capacity = double.Parse(values[fCapacity]);
+            maxLoad = int.Parse(values[fLoad]);
+            numOfHatches = int.Parse(values[fHatches]);
+        }
+
+        //Initializes values for BusinessPlane object's constructor
+        public static void initBusinessPlaneFields(string[] values)
+        {
+            name = values[Name];
+            year = int.Parse(values[Year]);
+            if (year > yearNow)
+            {
+                throw new IllegalYearException("Entered year has not come yet.");
+            }
+            price = double.Parse(values[Price]);
+            numOfVipPassengers = int.Parse(values[pPass]);
+            maxDistance = int.Parse(values[pDist]);
+            maxSpeed = int.Parse(values[pSpeed]);
+            capacity = double.Parse(values[pCapacity]);
+            maxLoad = int.Parse(values[pLoad]);
+        }
+
+        //Serializes List of Plane objects into binary file
+        public static void serializePlanes(List<Plane> planesList)
+        {
+            FileStream fsSerialize = new FileStream(@".\" + fileNameDat, FileMode.Create);
+
+            BinaryFormatter formatterSerialize = new BinaryFormatter();
+            try
+            {
+                formatterSerialize.Serialize(fsSerialize, planesList);
+                Console.WriteLine("Successfully serializedy\n");
+            }
+            catch (SerializationException e)
+            {
+                Console.WriteLine("Failed to serialize. Reason: " + e.Message);
+                throw;
+            }
+            finally
+            {
+                fsSerialize.Close();
+            }
+
+        }
+
+        //Deserializes binary file into List of Plane objects
+        public static void deserializePlanes()
+        {
+            List<Plane> planesList = null;
+
+            FileStream fsDeserialize = new FileStream(@".\" + fileNameDat, FileMode.Open);
+            try
+            {
+                BinaryFormatter formatterDeserialize = new BinaryFormatter();
+                planesList = (List<Plane>)formatterDeserialize.Deserialize(fsDeserialize);
+                Console.WriteLine("Successfully deserialized.\n");
+                PlaneListUtils.printListOfPlanes(planesList);
+
+            }
+            catch (SerializationException e)
+            {
+                Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (InvalidCastException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                fsDeserialize.Close();
             }
         }
-        Console.WriteLine("File has been succesfully read. The planes where added to the list");
-        }
-
-    //Serializes List of Plane objects into binary file
-    public static void serializePlanes(List<Plane> planesList)
-    {
-        FileStream fsSerialize = new FileStream(mydocpath + @"\" + fileNameDat, FileMode.Create);
-
-        BinaryFormatter formatterSerialize = new BinaryFormatter();
-        try
-        {
-            formatterSerialize.Serialize(fsSerialize, planesList);
-            Console.WriteLine("Successfully serialized (file placed in \"My Documents\")\n");
-        }
-        catch (SerializationException e)
-        {
-            Console.WriteLine("Failed to serialize. Reason: " + e.Message);
-            throw;
-        }
-        finally
-        {
-            fsSerialize.Close();
-        }
-
     }
-
-    //Deserializes binary file into List of Plane objects
-    public static void deserializePlanes()
-    {
-        List<Plane> planesList = null;
-
-        FileStream fsDeserialize = new FileStream(mydocpath + @"\" + fileNameDat, FileMode.Open);
-        try
-        {
-            BinaryFormatter formatterDeserialize = new BinaryFormatter();
-            planesList = (List<Plane>)formatterDeserialize.Deserialize(fsDeserialize);
-            Console.WriteLine("Successfully deserialized.\n");
-            PlaneListUtils.printListOfPlanes(planesList);
-
-        }
-        catch (SerializationException e)
-        {
-            Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-            throw;
-        }
-        catch (FileNotFoundException e)
-        {
-            Console.WriteLine(e.Message);
-        }
-        catch (InvalidCastException e)
-        {
-            Console.WriteLine(e.Message);
-        }
-        finally
-        {
-            fsDeserialize.Close();
-        }
-    }
-}
 }
