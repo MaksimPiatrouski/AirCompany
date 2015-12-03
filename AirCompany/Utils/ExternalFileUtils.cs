@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 namespace Utils
 {
@@ -32,7 +33,6 @@ namespace Utils
         const int pCapacity = 7;
         const int pLoad = 8;
         const int pClasses = 9;
-
         const int fDist = 4;
         const int fSpeed = 5;
         const int fCapacity = 6;
@@ -41,12 +41,15 @@ namespace Utils
 
         const string writeTxt = "1";
         const string readTxt = "2";
-        const string serialize = "3";
-        const string deserialize = "4";
+        const string serializeBinary = "3";
+        const string deserializeBinary = "4";
+        const string serializeXml = "5";
+        const string deserializeXml = "6";
         const string back = "0";
         const string fileNameTxt = "Planes.txt";
         const string fileNameTxtRead = "PlanesToRead.txt";
         const string fileNameDat = "Planes.dat";
+        const string fileNameXml = "Planes.xml";
 
         //Allows to select an action with external file 
         public static void fileActions(List<Plane> planesList)
@@ -56,8 +59,10 @@ namespace Utils
             {
                 Console.WriteLine("1. Write list of planes to txt file\n"
                        + "2. Read planes from txt file\n"
-                       + "3. Serialize objects\n"
-                       + "4. Deserialize objects\n"
+                       + "3. Serialize objects (binary)\n"
+                       + "4. Deserialize objects (binary)\n"
+                       + "5. Serialize objects (XML)\n"
+                       + "6. Deserialize objects (XML)\n"
                        + "0. Back to menu or exit\n");
 
                 string planeTypeSelector = Console.ReadLine();
@@ -73,13 +78,24 @@ namespace Utils
                         loop = false;
                         break;
 
-                    case serialize:
-                        ExternalFileUtils.serializePlanes(planesList);
+                    case serializeBinary:
+                        ExternalFileUtils.serializePlanesBin(planesList);
                         loop = false;
                         break;
 
-                    case deserialize:
-                        ExternalFileUtils.deserializePlanes();
+                    case deserializeBinary:
+                        ExternalFileUtils.deserializePlanesBin();
+                        loop = false;
+                        break;
+
+                    case serializeXml:
+                        ExternalFileUtils.serializePlanesXml(planesList);
+
+                        loop = false;
+                        break;
+
+                    case deserializeXml:
+                        ExternalFileUtils.deserializePlanesXml(planesList);
                         loop = false;
                         break;
 
@@ -101,7 +117,7 @@ namespace Utils
         {
             try
             {
-                using (StreamWriter outputFile = new StreamWriter(@".\" + fileNameTxt))
+                using (StreamWriter outputFile = new StreamWriter(fileNameTxt))
                     foreach (Plane p in planesList)
                     {
                         outputFile.WriteLine(p.ToString());
@@ -123,7 +139,7 @@ namespace Utils
         //Reads data from txt file and creates Plane object
         public static void readTxtFile(List<Plane> planesList)
         {
-            string[] lines = System.IO.File.ReadAllLines(@".\" + fileNameTxtRead);
+            string[] lines = System.IO.File.ReadAllLines(fileNameTxtRead);
             Console.WriteLine(lines.Length);
             for (int i = 0; i < lines.Length; i++)
             {
@@ -155,6 +171,111 @@ namespace Utils
             }
             Console.WriteLine("File has been read succesfully.");
         }
+
+        //Serializes List of Plane objects into binary file
+        public static void serializePlanesBin(List<Plane> planesList)
+        {
+            FileStream fsSerialize = new FileStream(fileNameDat, FileMode.Create);
+
+            BinaryFormatter formatterSerialize = new BinaryFormatter();
+            try
+            {
+                formatterSerialize.Serialize(fsSerialize, planesList);
+                Console.WriteLine("Successfully serializedy\n");
+            }
+            catch (SerializationException e)
+            {
+                Console.WriteLine("Failed to serialize. Reason: " + e.Message);
+                throw;
+            }
+            finally
+            {
+                fsSerialize.Close();
+            }
+
+        }
+
+        //Deserializes binary file into List of Plane objects
+        public static void deserializePlanesBin()
+        {
+            List<Plane> planesList = null;
+
+            FileStream fsDeserialize = new FileStream(fileNameDat, FileMode.Open);
+            try
+            {
+                BinaryFormatter formatterDeserialize = new BinaryFormatter();
+                planesList = (List<Plane>)formatterDeserialize.Deserialize(fsDeserialize);
+                Console.WriteLine("Successfully deserialized.\n");
+                PlaneListUtils.printListOfPlanes(planesList);
+
+            }
+            catch (SerializationException e)
+            {
+                Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
+                throw;
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (InvalidCastException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                fsDeserialize.Close();
+            }
+        }
+
+        //Serializes List of Plane objects to XML file
+        public static void serializePlanesXml(List<Plane> planesList)
+        {
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Plane>));
+            try
+            {
+                FileStream fs = new FileStream(fileNameXml, FileMode.Create);
+                serializer.Serialize(fs, planesList);
+                fs.Close();
+                Console.WriteLine("Successfully serialized");
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            planesList = null;
+        }
+
+        //Deserializes XML file into List of Plane objects
+        public static void deserializePlanesXml(List<Plane> planesList)
+        {
+            planesList = null;
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Plane>));
+            try
+            {
+                FileStream fs = new FileStream(fileNameXml, FileMode.Open);
+                planesList = (List<Plane>)serializer.Deserialize(fs);
+                Console.WriteLine("Successfully deserialized");
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
 
         //Initializes values for PassengerPlane object's constructor
         public static void initPassengerPlaneFields(string[] values)
@@ -207,62 +328,6 @@ namespace Utils
             maxSpeed = int.Parse(values[pSpeed]);
             capacity = double.Parse(values[pCapacity]);
             maxLoad = int.Parse(values[pLoad]);
-        }
-
-        //Serializes List of Plane objects into binary file
-        public static void serializePlanes(List<Plane> planesList)
-        {
-            FileStream fsSerialize = new FileStream(@".\" + fileNameDat, FileMode.Create);
-
-            BinaryFormatter formatterSerialize = new BinaryFormatter();
-            try
-            {
-                formatterSerialize.Serialize(fsSerialize, planesList);
-                Console.WriteLine("Successfully serializedy\n");
-            }
-            catch (SerializationException e)
-            {
-                Console.WriteLine("Failed to serialize. Reason: " + e.Message);
-                throw;
-            }
-            finally
-            {
-                fsSerialize.Close();
-            }
-
-        }
-
-        //Deserializes binary file into List of Plane objects
-        public static void deserializePlanes()
-        {
-            List<Plane> planesList = null;
-
-            FileStream fsDeserialize = new FileStream(@".\" + fileNameDat, FileMode.Open);
-            try
-            {
-                BinaryFormatter formatterDeserialize = new BinaryFormatter();
-                planesList = (List<Plane>)formatterDeserialize.Deserialize(fsDeserialize);
-                Console.WriteLine("Successfully deserialized.\n");
-                PlaneListUtils.printListOfPlanes(planesList);
-
-            }
-            catch (SerializationException e)
-            {
-                Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-                throw;
-            }
-            catch (FileNotFoundException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            catch (InvalidCastException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                fsDeserialize.Close();
-            }
         }
     }
 }

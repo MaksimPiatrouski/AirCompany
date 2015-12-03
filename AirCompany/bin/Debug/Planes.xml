@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<ArrayOfPlane xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Plane xsi:type="PassengerPlane">
+    <Name>AirBus A380-900</Name>
+    <Year>2013</Year>
+    <Price>401.4</Price>
+    <MaximumDistance>15400</MaximumDistance>
+    <MaximumSpeed>1020</MaximumSpeed>
+    <Capacity>318.4</Capacity>
+    <MaximumLoad>23600</MaximumLoad>
+    <NumberOfPassengers>656</NumberOfPassengers>
+    <NumberOfClasses>3</NumberOfClasses>
+  </Plane>
+  <Plane xsi:type="PassengerPlane">
+    <Name>Boeing 747</Name>
+    <Year>2010</Year>
+    <Price>255.3</Price>
+    <NumberOfClasses>3</NumberOfClasses>
+  </Plane>
+  <Plane xsi:type="BusinessPlane">
+    <Name>Bombardier BD-700</Name>
+    <Year>2008</Year>
+    <MaximumLoad>850</MaximumLoad>
+    <NumberOfVipPassengers>3</NumberOfVipPassengers>
+  </Plane>
+  <Plane xsi:type="BusinessPlane">
+    <Name>Dassault Falcon 900</Name>
+    <Year>2015</Year>
+    <Price>17.6</Price>
+    <MaximumDistance>8334</MaximumDistance>
+    <MaximumSpeed>916</MaximumSpeed>
+    <Capacity>16.6</Capacity>
+    <MaximumLoad>680</MaximumLoad>
+    <NumberOfVipPassengers>5</NumberOfVipPassengers>
+  </Plane>
+  <Plane xsi:type="FreightPlane">
+    <Name>An-225 Mriya</Name>
+    <Year>2001</Year>
+    <Price>225.3</Price>
+    <MaximumDistance>4000</MaximumDistance>
+    <MaximumSpeed>850</MaximumSpeed>
+    <Capacity>1300</Capacity>
+    <MaximumLoad>152000</MaximumLoad>
+    <NumberOfHatches>2</NumberOfHatches>
+  </Plane>
+</ArrayOfPlane>

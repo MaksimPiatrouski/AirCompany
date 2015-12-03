@@ -33,11 +33,7 @@
 
         public override string ToString()
         {
-<<<<<<< HEAD
-            return "\nAirCompany: " + companyName + "\n. Number of planes: " + numberOfPlanes
-=======
             return "\n. AirCompany name: \"" + companyName + "\"\n. Number of planes: " + numberOfPlanes
->>>>>>> 0792511ef831006e683b2b2b73f00cd2faefab63
                 + "\n. Summary planes price, mls $: " + summaryPrice + "\n";
         }
     }

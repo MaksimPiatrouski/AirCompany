@@ -1,15 +1,19 @@
 ﻿using Beans;
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace Utils
 {
     class PlaneListUtils
     {
+        [XmlArray("PlanesList")]
+        [XmlArrayItem("PlaneObject")]
+        static List<Plane> planesList = new List<Plane>();
+
         //Creates list of new Plane objects
         public static List<Plane> createPlanesList()
         {
-            List<Plane> planesList = new List<Plane>();
             planesList.Add(new PassengerPlane("AirBus A380-900", 2013, 401.4, 656, 15400, 1020, 318.4, 23600, 3));
             planesList.Add(new PassengerPlane("Boeing 747", 2010, 255.3, 581, 14850, 988, 275.6, 21200, 3));
             planesList.Add(new BusinessPlane("Bombardier BD-700", 2008, 48.2, 3, 9360, 950, 18.2, 850));

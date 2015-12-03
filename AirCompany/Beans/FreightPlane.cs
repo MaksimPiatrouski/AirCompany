@@ -1,17 +1,25 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace Beans
 {
     [Serializable]
-    class FreightPlane : Plane
+    [XmlType("FreightPlane")]
+    public class FreightPlane : Plane
     {
+        [XmlElement(ElementName = "FreightPlane")]
         private int _numOfHatches;
+
+        public FreightPlane()
+        {
+        }
 
         public FreightPlane(string name, int year, double price, int maxDistance, int maxSpeed, double capacity, int maxLoad, int numOfHatches) : base(name, year, price, maxDistance, maxSpeed, capacity, maxLoad)
         {
             this._numOfHatches = numOfHatches;
         }
 
+        [XmlElement("NumberOfHatches")]
         public int numOfHatches
         {
             get { return _numOfHatches; }

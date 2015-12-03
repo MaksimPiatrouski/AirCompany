@@ -43,25 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessPlane.cs" />
-    <Compile Include="CompanyUtils.cs" />
-    <Compile Include="FindPlaneUtils.cs" />
-    <Compile Include="IllegalMinMaxValuesException.cs" />
-    <Compile Include="PlaneListUtils.cs" />
-    <Compile Include="NavigationUtils.cs" />
-    <Compile Include="NoSuchPlaneException.cs" />
-    <Compile Include="ExternalFileUtils.cs" />
-    <Compile Include="IllegalYearException.cs" />
-    <Compile Include="FreightPlane.cs" />
-    <Compile Include="AddPlanesUtils.cs" />
-    <Compile Include="PassengerPlane.cs" />
-    <Compile Include="Company.cs" />
-    <Compile Include="Plane.cs" />
-    <Compile Include="Runner.cs" />
+    <Compile Include="Beans\BusinessPlane.cs" />
+    <Compile Include="Utils\CompanyUtils.cs" />
+    <Compile Include="Utils\FindPlaneUtils.cs" />
+    <Compile Include="Exceptions\IllegalMinMaxValuesException.cs" />
+    <Compile Include="Utils\PlaneListUtils.cs" />
+    <Compile Include="Utils\NavigationUtils.cs" />
+    <Compile Include="Exceptions\NoSuchPlaneException.cs" />
+    <Compile Include="Utils\ExternalFileUtils.cs" />
+    <Compile Include="Exceptions\IllegalYearException.cs" />
+    <Compile Include="Beans\FreightPlane.cs" />
+    <Compile Include="Utils\AddPlanesUtils.cs" />
+    <Compile Include="Beans\PassengerPlane.cs" />
+    <Compile Include="Beans\Company.cs" />
+    <Compile Include="Beans\Plane.cs" />
+    <Compile Include="Runner\Runner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemovePlaneUtils.cs" />
-    <Compile Include="SortPlanesUtils.cs" />
-    <Compile Include="SumarySpecsUtils.cs" />
+    <Compile Include="Utils\RemovePlaneUtils.cs" />
+    <Compile Include="Utils\SortPlanesUtils.cs" />
+    <Compile Include="Utils\SumarySpecsUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
